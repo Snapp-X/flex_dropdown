@@ -1,6 +1,6 @@
 
-## Custom Drop Down  [![pub package](https://img.shields.io/pub/v/flex_dropdown?color=blue&style=plastic)](https://pub.dartlang.org/packages/flex_dropdown)
-Create elegant and customizable dropdowns effortlessly with the Custom Drop Down package. This Flutter package enables you to easily implement dropdowns with custom styling, animations, and data sources to match your app's needs.
+## Flex DropDown | Custom DropDown  [![pub package](https://img.shields.io/pub/v/flex_dropdown?color=blue&style=plastic)](https://pub.dartlang.org/packages/flex_dropdown)
+Create elegant and customizable dropdowns effortlessly with the Flex DropDown package. This Flutter package enables you to easily implement dropdowns with custom styling, animations, and data sources to match your app's needs.
 
 https://github.com/Snapp-X/custom_drop_down/assets/47558577/2c99d33b-f631-4a01-9c29-08475af363af
 
@@ -9,7 +9,7 @@ https://github.com/Snapp-X/custom_drop_down/assets/47558577/2c99d33b-f631-4a01-9
 
 If you're interested in the background story behind this package's development, you can read our article on Medium: [Creating Custom Dropdowns with OverlayPortal in Flutter](https://medium.com/snapp-x/creating-custom-dropdowns-with-overlayportal-in-flutter-4f09b217cfce).
 
-To get started with the Custom Drop Down package, ensure you have Flutter installed and a basic understanding of how Flutter packages work. You can follow the instructions below to integrate the package into your project:
+To get started with the Flex DropDown package, ensure you have Flutter installed and a basic understanding of how Flutter packages work. You can follow the instructions below to integrate the package into your project:
 
 - Add the following line to your `pubspec.yaml` file:
 
@@ -34,14 +34,14 @@ import 'package:flex_dropdown/flex_dropdown.dart';
 
 ## Usage
 
-Here's a simple example showcasing the usage of the Custom Drop Down package:
+Here's a simple example showcasing the usage of the Flex DropDown package:
 
 ```dart
   final OverlayPortalController _controller = OverlayPortalController();
 
   @override
   Widget build(BuildContext context) {
-    return RawCustomDropDown(
+    return RawFlexDropDown(
       controller: _controller,
       buttonBuilder: (context, onTap) {
         return ButtonWidget(
@@ -64,7 +64,7 @@ Here's a simple example showcasing the usage of the Custom Drop Down package:
   }
 ```
 
-For a complete example, you can explore the code in the [example folder of the repository](https://github.com/Snapp-X/custom_drop_down/blob/main/example/lib/main.dart "example folder of the repository").
+For a complete example, you can explore the code in the [example folder of the repository](https://github.com/Snapp-X/flex_dropdown/blob/main/example/lib/main.dart "example folder of the repository").
 
 ## Additional information
 

@@ -38,13 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
       appBar: AppBar(
-        title: const Text('Custom Drop Down'),
+        title: const Text('Flex Drop Down'),
       ),
       body: Align(
         alignment: Alignment.topCenter,
         child: Padding(
           padding: const EdgeInsets.only(top: 64.0),
-          child: RawCustomDropDown(
+          child: RawFlexDropDown(
             controller: _controller,
             buttonBuilder: (context, onTap) {
               return ButtonWidget(

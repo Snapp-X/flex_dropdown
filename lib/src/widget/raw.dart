@@ -15,8 +15,8 @@ enum MenuPosition {
   bottom,
 }
 
-class RawCustomDropDown extends StatefulWidget {
-  const RawCustomDropDown({
+class RawFlexDropDown extends StatefulWidget {
+  const RawFlexDropDown({
     super.key,
     required this.controller,
     required this.buttonBuilder,
@@ -31,10 +31,10 @@ class RawCustomDropDown extends StatefulWidget {
   final MenuPosition menuPosition;
 
   @override
-  State<RawCustomDropDown> createState() => _RawCustomDropDownState();
+  State<RawFlexDropDown> createState() => _RawFlexDropDownState();
 }
 
-class _RawCustomDropDownState extends State<RawCustomDropDown> {
+class _RawFlexDropDownState extends State<RawFlexDropDown> {
   final _link = LayerLink();
 
   /// width of the button after the widget rendered
