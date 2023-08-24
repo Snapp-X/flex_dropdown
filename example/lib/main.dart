@@ -36,31 +36,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onInverseSurface,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Custom Drop Down'),
       ),
       body: Align(
         alignment: Alignment.topCenter,
         child: Padding(
           padding: const EdgeInsets.only(top: 64.0),
-          child: SizedBox(
-            width: 500,
-            child: RawCustomDropDown(
-              controller: _controller,
-              buttonBuilder: (context, onTap) => ButtonWidget(onTap: onTap),
-              menuBuilder: (context, width) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: MenuWidget(
-                    width: width,
-                    onItemTap: () {
-                      _controller.hide();
-                    },
-                  ),
-                );
-              },
-            ),
+          child: RawCustomDropDown(
+            controller: _controller,
+            buttonBuilder: (context, onTap) {
+              return ButtonWidget(
+                width: 500,
+                onTap: onTap,
+              );
+            },
+            menuBuilder: (context, width) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: MenuWidget(
+                  width: width,
+                  onItemTap: () {
+                    _controller.hide();
+                  },
+                ),
+              );
+            },
           ),
         ),
       ),
