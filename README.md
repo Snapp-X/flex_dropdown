@@ -2,6 +2,9 @@
 ## Custom Drop Down
 Create elegant and customizable dropdowns effortlessly with the Custom Drop Down package. This Flutter package enables you to easily implement dropdowns with custom styling, animations, and data sources to match your app's needs.
 
+https://github.com/Snapp-X/custom_drop_down/assets/47558577/2c99d33b-f631-4a01-9c29-08475af363af
+
+
 ## Getting Started
 
 If you're interested in the background story behind this package's development, you can read our article on Medium: [Creating Custom Dropdowns with OverlayPortal in Flutter](https://medium.com/snapp-x/creating-custom-dropdowns-with-overlayportal-in-flutter-4f09b217cfce).
