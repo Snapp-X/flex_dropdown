@@ -1,3 +1,3 @@
-library custom_drop_down;
+library flex_dropdown;
 
 export 'src/widget/raw.dart';

@@ -1,5 +1,5 @@
 
-## Custom Drop Down
+## Custom Drop Down  [![pub package](https://img.shields.io/pub/v/flex_dropdown?color=blue&style=plastic)](https://pub.dartlang.org/packages/flex_dropdown)
 Create elegant and customizable dropdowns effortlessly with the Custom Drop Down package. This Flutter package enables you to easily implement dropdowns with custom styling, animations, and data sources to match your app's needs.
 
 https://github.com/Snapp-X/custom_drop_down/assets/47558577/2c99d33b-f631-4a01-9c29-08475af363af
@@ -15,7 +15,7 @@ To get started with the Custom Drop Down package, ensure you have Flutter instal
 
 ```yaml
 dependencies:
-  custom_drop_down: ^0.1.0  
+  flex_dropdown: ^0.1.0  
 ```
 
 - Run the following command to fetch the package:
@@ -27,7 +27,7 @@ flutter pub get
 - Import the package in your Dart code:
 
 ```dart
-import 'package:custom_drop_down/custom_drop_down.dart';
+import 'package:flex_dropdown/flex_dropdown.dart';
 ```
 
 

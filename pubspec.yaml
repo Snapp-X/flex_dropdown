@@ -1,5 +1,5 @@
-name: custom_drop_down
-description: A new Flutter package project.
+name: flex_dropdown
+description: This package enables you to easily implement dropdowns with custom styling, animations, and data sources to match your app's needs.
 version: 0.1.0
 homepage: https://github.com/Snapp-X/custom_drop_down
 

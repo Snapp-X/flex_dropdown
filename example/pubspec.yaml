@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  custom_drop_down:
+  flex_dropdown:
     path: ../
 
   # The following adds the Cupertino Icons font to your application.
