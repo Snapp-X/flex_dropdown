@@ -10,9 +10,12 @@ typedef MenuBuilder = Widget Function(
   double? width,
 );
 
+//* PRECISE LOCATION OF THE DROPDOWN
 enum MenuPosition {
-  top,
-  bottom,
+  topLeft,
+  topRight,
+  bottomLeft,
+  bottomRight,
 }
 
 class RawFlexDropDown extends StatefulWidget {
@@ -21,7 +24,7 @@ class RawFlexDropDown extends StatefulWidget {
     required this.controller,
     required this.buttonBuilder,
     required this.menuBuilder,
-    this.menuPosition = MenuPosition.bottom,
+    this.menuPosition = MenuPosition.bottomLeft,
   });
 
   final OverlayPortalController controller;
@@ -49,10 +52,26 @@ class _RawFlexDropDownState extends State<RawFlexDropDown> {
         overlayChildBuilder: (BuildContext context) {
           return CompositedTransformFollower(
             link: _link,
-            targetAnchor: Alignment.bottomLeft,
+            targetAnchor: switch (widget.menuPosition) {
+              MenuPosition.bottomRight => Alignment.bottomRight,
+              MenuPosition.bottomLeft => Alignment.bottomLeft,
+              MenuPosition.topLeft => Alignment.topLeft,
+              MenuPosition.topRight => Alignment.topRight,
+            },
+            followerAnchor: switch (widget.menuPosition) {
+              MenuPosition.bottomRight => Alignment.topRight,
+              MenuPosition.bottomLeft => Alignment.topLeft,
+              MenuPosition.topLeft => Alignment.bottomLeft,
+              MenuPosition.topRight => Alignment.bottomRight,
+            },
             showWhenUnlinked: false,
             child: Align(
-              alignment: AlignmentDirectional.topStart,
+              alignment: switch (widget.menuPosition) {
+                MenuPosition.bottomRight => AlignmentDirectional.topEnd,
+                MenuPosition.bottomLeft => AlignmentDirectional.topStart,
+                MenuPosition.topLeft => AlignmentDirectional.bottomStart,
+                MenuPosition.topRight => AlignmentDirectional.bottomEnd,
+              },
               child: widget.menuBuilder(context, _buttonWidth),
             ),
           );
