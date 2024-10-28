@@ -43,6 +43,7 @@ Here's a simple example showcasing the usage of the Flex DropDown package:
   Widget build(BuildContext context) {
     return RawFlexDropDown(
       controller: _controller,
+      dismissOnTapOutside: true, // Set to true to allow dismissal on outside tap
       buttonBuilder: (context, onTap) {
         return ButtonWidget(
           width: 500,

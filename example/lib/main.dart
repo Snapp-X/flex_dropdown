@@ -33,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final OverlayPortalController _controller = OverlayPortalController();
   MenuPosition position = MenuPosition.bottomStart;
+  bool dismissOnTapOutside = true;
+  bool useButtonSize = true;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: RawFlexDropDown(
                 controller: _controller,
                 menuPosition: position,
+                dismissOnTapOutside: dismissOnTapOutside,
                 buttonBuilder: (context, onTap) {
                   return ButtonWidget(
                     width: 400,
@@ -61,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: MenuWidget(
-                      width: width,
+                      width: useButtonSize ? width : 300,
                       onItemTap: () {
                         _controller.hide();
                       },
@@ -72,6 +75,33 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           const SizedBox(height: 250),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('Dismiss on tap outside'),
+              const SizedBox(width: 8),
+              Switch(
+                value: dismissOnTapOutside,
+                onChanged: (value) {
+                  setState(() {
+                    dismissOnTapOutside = value;
+                  });
+                },
+              ),
+              const SizedBox(width: 32),
+              const Text('Use button size'),
+              const SizedBox(width: 8),
+              Switch(
+                value: useButtonSize,
+                onChanged: (value) {
+                  setState(() {
+                    useButtonSize = value;
+                  });
+                },
+              ),
+            ],
+          ),
+          const SizedBox(height: 32),
           Wrap(
             children: [
               ElevatedButton(
@@ -123,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text("Top Center"),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
@@ -180,7 +210,7 @@ class MenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      width: width,
       padding: const EdgeInsets.all(8),
       decoration: ShapeDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
