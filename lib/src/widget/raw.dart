@@ -47,6 +47,8 @@ class _RawFlexDropDownState extends State<RawFlexDropDown> {
 
   @override
   Widget build(BuildContext context) {
+    final direction = Directionality.of(context);
+
     return CompositedTransformTarget(
       link: _link,
       child: OverlayPortal(
@@ -54,32 +56,11 @@ class _RawFlexDropDownState extends State<RawFlexDropDown> {
         overlayChildBuilder: (BuildContext context) {
           return CompositedTransformFollower(
             link: _link,
-            targetAnchor: switch (widget.menuPosition) {
-              MenuPosition.bottomEnd => Alignment.bottomRight,
-              MenuPosition.bottomStart => Alignment.bottomLeft,
-              MenuPosition.bottomCenter => Alignment.bottomCenter,
-              MenuPosition.topStart => Alignment.topLeft,
-              MenuPosition.topEnd => Alignment.topRight,
-              MenuPosition.topCenter => Alignment.topCenter,
-            },
-            followerAnchor: switch (widget.menuPosition) {
-              MenuPosition.bottomEnd => Alignment.topRight,
-              MenuPosition.bottomStart => Alignment.topLeft,
-              MenuPosition.bottomCenter => Alignment.topCenter,
-              MenuPosition.topStart => Alignment.bottomLeft,
-              MenuPosition.topEnd => Alignment.bottomRight,
-              MenuPosition.topCenter => Alignment.bottomCenter,
-            },
+            targetAnchor: _createTargetAnchor(direction),
+            followerAnchor: _createFollowerAnchor(direction),
             showWhenUnlinked: false,
             child: Align(
-              alignment: switch (widget.menuPosition) {
-                MenuPosition.bottomEnd => AlignmentDirectional.topEnd,
-                MenuPosition.bottomStart => AlignmentDirectional.topStart,
-                MenuPosition.bottomCenter => AlignmentDirectional.topCenter,
-                MenuPosition.topStart => AlignmentDirectional.bottomStart,
-                MenuPosition.topEnd => AlignmentDirectional.bottomEnd,
-                MenuPosition.topCenter => AlignmentDirectional.bottomCenter,
-              },
+              alignment: _createAlignment(),
               child: widget.menuBuilder(context, _buttonWidth),
             ),
           );
@@ -87,6 +68,47 @@ class _RawFlexDropDownState extends State<RawFlexDropDown> {
         child: widget.buttonBuilder(context, onTap),
       ),
     );
+  }
+
+  AlignmentDirectional _createAlignment() {
+    return switch (widget.menuPosition) {
+      MenuPosition.bottomEnd => AlignmentDirectional.topEnd,
+      MenuPosition.bottomStart => AlignmentDirectional.topStart,
+      MenuPosition.bottomCenter => AlignmentDirectional.topCenter,
+      MenuPosition.topStart => AlignmentDirectional.bottomStart,
+      MenuPosition.topEnd => AlignmentDirectional.bottomEnd,
+      MenuPosition.topCenter => AlignmentDirectional.bottomCenter,
+    };
+  }
+
+  Alignment _createFollowerAnchor(TextDirection direction) {
+    return switch (widget.menuPosition) {
+      MenuPosition.bottomEnd => AlignmentDirectional.topEnd.resolve(direction),
+      MenuPosition.bottomStart =>
+        AlignmentDirectional.topStart.resolve(direction),
+      MenuPosition.bottomCenter =>
+        AlignmentDirectional.topCenter.resolve(direction),
+      MenuPosition.topStart =>
+        AlignmentDirectional.bottomStart.resolve(direction),
+      MenuPosition.topEnd => AlignmentDirectional.bottomEnd.resolve(direction),
+      MenuPosition.topCenter =>
+        AlignmentDirectional.bottomCenter.resolve(direction),
+    };
+  }
+
+  Alignment _createTargetAnchor(TextDirection direction) {
+    return switch (widget.menuPosition) {
+      MenuPosition.bottomEnd =>
+        AlignmentDirectional.bottomEnd.resolve(direction),
+      MenuPosition.bottomStart =>
+        AlignmentDirectional.bottomStart.resolve(direction),
+      MenuPosition.bottomCenter =>
+        AlignmentDirectional.bottomCenter.resolve(direction),
+      MenuPosition.topStart => AlignmentDirectional.topStart.resolve(direction),
+      MenuPosition.topEnd => AlignmentDirectional.topEnd.resolve(direction),
+      MenuPosition.topCenter =>
+        AlignmentDirectional.topCenter.resolve(direction),
+    };
   }
 
   void onTap() {
