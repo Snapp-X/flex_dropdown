@@ -29,7 +29,9 @@ flutter pub get
 ```dart
 import 'package:flex_dropdown/flex_dropdown.dart';
 ```
+## [Online Demo](https://snapp-x.github.io/flex_dropdown/)
 
+You can view an interactive online example of Flex DropDown at the following link: [Flex DropDown Online Example](https://snapp-x.github.io/flex_dropdown/).
 
 
 ## Usage
