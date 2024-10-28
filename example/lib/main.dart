@@ -32,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final OverlayPortalController _controller = OverlayPortalController();
-  MenuPosition position = MenuPosition.bottomLeft;
+  MenuPosition position = MenuPosition.bottomStart;
 
   @override
   Widget build(BuildContext context) {
@@ -75,33 +75,53 @@ class _MyHomePageState extends State<MyHomePage> {
           Wrap(
             children: [
               ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      position = MenuPosition.bottomLeft;
-                    });
-                  },
-                  child: const Text("Bottom Left")),
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.bottomStart;
+                  });
+                },
+                child: const Text("Bottom Left"),
+              ),
               ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      position = MenuPosition.bottomRight;
-                    });
-                  },
-                  child: const Text("Bottom Right")),
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.bottomEnd;
+                  });
+                },
+                child: const Text("Bottom Right"),
+              ),
               ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      position = MenuPosition.topLeft;
-                    });
-                  },
-                  child: const Text("Top Left")),
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.bottomCenter;
+                  });
+                },
+                child: const Text("Bottom Center"),
+              ),
               ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      position = MenuPosition.topRight;
-                    });
-                  },
-                  child: const Text("Top Right")),
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.topStart;
+                  });
+                },
+                child: const Text("Top Left"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.topEnd;
+                  });
+                },
+                child: const Text("Top Right"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.topCenter;
+                  });
+                },
+                child: const Text("Top Center"),
+              ),
             ],
           )
         ],

@@ -12,10 +12,12 @@ typedef MenuBuilder = Widget Function(
 
 //* PRECISE LOCATION OF THE DROPDOWN
 enum MenuPosition {
-  topLeft,
-  topRight,
-  bottomLeft,
-  bottomRight,
+  topStart,
+  topEnd,
+  topCenter,
+  bottomStart,
+  bottomEnd,
+  bottomCenter,
 }
 
 class RawFlexDropDown extends StatefulWidget {
@@ -24,7 +26,7 @@ class RawFlexDropDown extends StatefulWidget {
     required this.controller,
     required this.buttonBuilder,
     required this.menuBuilder,
-    this.menuPosition = MenuPosition.bottomLeft,
+    this.menuPosition = MenuPosition.bottomStart,
   });
 
   final OverlayPortalController controller;
@@ -53,24 +55,30 @@ class _RawFlexDropDownState extends State<RawFlexDropDown> {
           return CompositedTransformFollower(
             link: _link,
             targetAnchor: switch (widget.menuPosition) {
-              MenuPosition.bottomRight => Alignment.bottomRight,
-              MenuPosition.bottomLeft => Alignment.bottomLeft,
-              MenuPosition.topLeft => Alignment.topLeft,
-              MenuPosition.topRight => Alignment.topRight,
+              MenuPosition.bottomEnd => Alignment.bottomRight,
+              MenuPosition.bottomStart => Alignment.bottomLeft,
+              MenuPosition.bottomCenter => Alignment.bottomCenter,
+              MenuPosition.topStart => Alignment.topLeft,
+              MenuPosition.topEnd => Alignment.topRight,
+              MenuPosition.topCenter => Alignment.topCenter,
             },
             followerAnchor: switch (widget.menuPosition) {
-              MenuPosition.bottomRight => Alignment.topRight,
-              MenuPosition.bottomLeft => Alignment.topLeft,
-              MenuPosition.topLeft => Alignment.bottomLeft,
-              MenuPosition.topRight => Alignment.bottomRight,
+              MenuPosition.bottomEnd => Alignment.topRight,
+              MenuPosition.bottomStart => Alignment.topLeft,
+              MenuPosition.bottomCenter => Alignment.topCenter,
+              MenuPosition.topStart => Alignment.bottomLeft,
+              MenuPosition.topEnd => Alignment.bottomRight,
+              MenuPosition.topCenter => Alignment.bottomCenter,
             },
             showWhenUnlinked: false,
             child: Align(
               alignment: switch (widget.menuPosition) {
-                MenuPosition.bottomRight => AlignmentDirectional.topEnd,
-                MenuPosition.bottomLeft => AlignmentDirectional.topStart,
-                MenuPosition.topLeft => AlignmentDirectional.bottomStart,
-                MenuPosition.topRight => AlignmentDirectional.bottomEnd,
+                MenuPosition.bottomEnd => AlignmentDirectional.topEnd,
+                MenuPosition.bottomStart => AlignmentDirectional.topStart,
+                MenuPosition.bottomCenter => AlignmentDirectional.topCenter,
+                MenuPosition.topStart => AlignmentDirectional.bottomStart,
+                MenuPosition.topEnd => AlignmentDirectional.bottomEnd,
+                MenuPosition.topCenter => AlignmentDirectional.bottomCenter,
               },
               child: widget.menuBuilder(context, _buttonWidth),
             ),
