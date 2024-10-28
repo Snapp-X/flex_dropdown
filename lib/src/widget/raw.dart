@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 typedef ButtonBuilder = Widget Function(
@@ -27,6 +29,7 @@ class RawFlexDropDown extends StatefulWidget {
     required this.buttonBuilder,
     required this.menuBuilder,
     this.menuPosition = MenuPosition.bottomStart,
+    this.dismissOnTapOutside = true,
   });
 
   final OverlayPortalController controller;
@@ -34,6 +37,7 @@ class RawFlexDropDown extends StatefulWidget {
   final ButtonBuilder buttonBuilder;
   final MenuBuilder menuBuilder;
   final MenuPosition menuPosition;
+  final bool dismissOnTapOutside;
 
   @override
   State<RawFlexDropDown> createState() => _RawFlexDropDownState();
@@ -48,12 +52,23 @@ class _RawFlexDropDownState extends State<RawFlexDropDown> {
   @override
   Widget build(BuildContext context) {
     final direction = Directionality.of(context);
-
     return CompositedTransformTarget(
       link: _link,
       child: OverlayPortal(
         controller: widget.controller,
         overlayChildBuilder: (BuildContext context) {
+          Widget menu = widget.menuBuilder(context, _buttonWidth);
+
+          if (widget.dismissOnTapOutside) {
+            log('dismissOnTapOutside');
+            menu = TapRegion(
+              onTapOutside: (event) {
+                widget.controller.hide();
+              },
+              child: menu,
+            );
+          }
+
           return CompositedTransformFollower(
             link: _link,
             targetAnchor: _createTargetAnchor(direction),
@@ -61,7 +76,7 @@ class _RawFlexDropDownState extends State<RawFlexDropDown> {
             showWhenUnlinked: false,
             child: Align(
               alignment: _createAlignment(),
-              child: widget.menuBuilder(context, _buttonWidth),
+              child: menu,
             ),
           );
         },
