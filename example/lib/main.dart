@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final OverlayPortalController _controller = OverlayPortalController();
+  MenuPosition position = MenuPosition.bottomStart;
 
   @override
   Widget build(BuildContext context) {
@@ -40,31 +41,90 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text('Flex Drop Down'),
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 64.0),
-          child: RawFlexDropDown(
-            controller: _controller,
-            buttonBuilder: (context, onTap) {
-              return ButtonWidget(
-                width: 500,
-                onTap: onTap,
-              );
-            },
-            menuBuilder: (context, width) {
-              return Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: MenuWidget(
-                  width: width,
-                  onItemTap: () {
-                    _controller.hide();
-                  },
-                ),
-              );
-            },
+      body: Column(
+        children: [
+          const SizedBox(height: 150),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 64.0),
+              child: RawFlexDropDown(
+                controller: _controller,
+                menuPosition: position,
+                buttonBuilder: (context, onTap) {
+                  return ButtonWidget(
+                    width: 400,
+                    onTap: onTap,
+                  );
+                },
+                menuBuilder: (context, width) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: MenuWidget(
+                      width: width,
+                      onItemTap: () {
+                        _controller.hide();
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
-        ),
+          const SizedBox(height: 250),
+          Wrap(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.bottomStart;
+                  });
+                },
+                child: const Text("Bottom Left"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.bottomEnd;
+                  });
+                },
+                child: const Text("Bottom Right"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.bottomCenter;
+                  });
+                },
+                child: const Text("Bottom Center"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.topStart;
+                  });
+                },
+                child: const Text("Top Left"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.topEnd;
+                  });
+                },
+                child: const Text("Top Right"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    position = MenuPosition.topCenter;
+                  });
+                },
+                child: const Text("Top Center"),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -120,7 +180,7 @@ class MenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ?? 200,
+      width: 300,
       padding: const EdgeInsets.all(8),
       decoration: ShapeDecoration(
         color: Theme.of(context).colorScheme.primaryContainer,
